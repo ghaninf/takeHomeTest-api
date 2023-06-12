@@ -49,11 +49,20 @@ const ProductController = {
     try {
       const data = req.body
       const product = await Product
+        .find({ name: data.name })
+
+      if (!product) {
+        return res
+          .status(400)
+          .json({ message: 'Product is already exist.' })
+      }
+
+      await Product
         .create(data);
 
       return res
         .status(200)
-        .json(product)
+        .json()
     } catch (error) {
       next(error);
     }

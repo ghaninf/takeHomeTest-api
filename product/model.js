@@ -19,9 +19,9 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  file: {
-    type: Object,
-    // required: true
+  base64: {
+    type: String,
+    required: true
   },
   createdAt: Number,
   updatedAt: Number,

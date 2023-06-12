@@ -6,21 +6,14 @@ const SchemaProduct = {
       price: { type: 'number' },
       sell: { type: 'number' },
       stock: { type: 'number' },
-      file: {
-        type: 'object',
-        properties: {
-          URL: { type: 'string' },
-          filename: { type: 'string' }
-        },
-        required: [ 'URL', 'filename' ]
-      }
+      base64: { type: 'string' }
     },
     required: [
       'name',
       'price',
       'sell',
       'stock',
-      // 'file'
+      'base64'
     ]
   }
 }
