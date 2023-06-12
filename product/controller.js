@@ -70,8 +70,7 @@ const ProductController = {
 
   async update(req, res, next) {
     try {
-      let product = {};
-      product = await Product
+      let product = await Product
         .findOne({_id: req.params.id})
 
       if (!product) {
@@ -80,12 +79,12 @@ const ProductController = {
           .json({ message: 'Product doesn\'t exist.' })
       }
 
-      product = req.body
-      product = await Product.save()
+      product = Object.assign(product, req.body)
+      product.save()
 
       return res
         .status(200)
-        .json(product)
+        .json()
     } catch (error) {
       next(error);
     }
@@ -97,7 +96,6 @@ const ProductController = {
       product = await Product
         .findOne({ _id: new ObjectID(req.params.id) })
 
-      console.log(product)
       if (!product) {
         return res
           .status(400)
