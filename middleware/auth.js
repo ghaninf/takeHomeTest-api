@@ -1,10 +1,9 @@
 const { Token } = require('../libs')
 
 const Authentication = {
-  authenticate(roles = []) {
+  authenticate() {
     return (req, res, next) => {
       const authToken = req.headers.authorization?.replace('Bearer ', '')
-
       if (authToken) {
         try {
           const auth = Token.verifyJWTToken(authToken)

@@ -3,7 +3,7 @@ const controller = require('./controller');
 
 router.post(
   '/login',
-  controller.login()
+  controller.login
 );
 
 module.exports = router;

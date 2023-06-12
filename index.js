@@ -27,10 +27,11 @@ try {
 }
 
 const account = require('./account/routes');
-app.use('./account', account)
+app.use('/account', account)
 
 const product = require('./product/routes')
 app.use('/product', product)
+
 
 app.get('/', (req, res, next) => {
   res.send('It works')

@@ -1,11 +1,20 @@
 const Product = require('./model');
+const ObjectID = require('mongoose').Types.ObjectId;
 
 const ProductController = {
   async getList(req, res, next) {
     try {
       const { page, offset, limit } = req.query
+      const query = {
+        deletedAt: 0
+      }
+
+      if (req.params.name) {
+        query['name'] = req.params.name
+      }
+
       const products = await Product
-        .find()
+        .find(query)
         .sort({ createdAt: -1 })
         .limit(limit)
         .skip(offset)
@@ -17,7 +26,7 @@ const ProductController = {
   
       return res
         .status(200)
-        .json(products, { page: page, limit: limit, total: totalDocs })
+        .json({data: products, page: { page: page, limit: limit, total: totalDocs }})
     } catch (error) {
       next(error);
     }
@@ -77,8 +86,9 @@ const ProductController = {
     try {
       let product = {}
       product = await Product
-        .findOne({ _id: req.params.id, deletedAt: 0 })
+        .findOne({ _id: new ObjectID(req.params.id) })
 
+      console.log(product)
       if (!product) {
         return res
           .status(400)

@@ -5,32 +5,33 @@ const SchemaProduct = require('./schema');
 
 router.get(
   '/list',
-  controller.getList()
+  controller.getList
 );
 
 router.get(
   '/:id',
-  controller.getDetail()
+  controller.getDetail
 );
 
 router.post(
   '/create',
   auth.authenticate(),
   validation.validate({ schema: SchemaProduct.CreateProduct }),
-  controller.create()
+  controller.create
 )
   
 router.put(
   '/update/:id',
   auth.authenticate(),
   validation.validate({ schema: SchemaProduct.CreateProduct }),
-  controller.update()
+  controller.update
 )
 
 router.delete(
-  '/delete',
+  '/delete/:id',
   auth.authenticate(),
-  controller.remove()
+  controller.remove
 )
+
 
 module.exports = router;
